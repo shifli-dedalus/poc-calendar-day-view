@@ -43,6 +43,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.airbnb.android.showkase.annotation.ShowkaseComposable
 import com.example.sample.ui.CategoryChooserDropMenu
 import com.example.sample.ui.DatePickerView
 import com.example.sample.ui.ElevatedIconButton
@@ -533,7 +534,7 @@ fun addNewEvent(event: Event) {
 
 @Preview
 @Composable
-private fun CustomCreateEventScreen_Preview() =
+fun CustomCreateEventScreen_Preview() =
     SampleAppThemePreview {
         CustomCreateEventScreen()
     }

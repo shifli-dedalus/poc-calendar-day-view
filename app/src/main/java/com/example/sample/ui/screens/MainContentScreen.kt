@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.airbnb.android.showkase.annotation.ShowkaseComposable
 import com.example.sample.ui.CustomCreateEventRoute
 import com.example.sample.ui.LocalNavController
 import com.example.sample.ui.theme.SampleAppThemePreview
@@ -46,7 +47,8 @@ fun MainContentScreen(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-private fun MainContentScreenPreview() =
+@ShowkaseComposable
+fun MainContentScreenPreview() =
     SampleAppThemePreview {
         MainContentScreen()
     }

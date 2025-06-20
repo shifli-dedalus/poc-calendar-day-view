@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.paparazzi)
 }
 
 android {
@@ -60,4 +62,11 @@ dependencies {
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
+
+    implementation("com.airbnb.android:showkase:1.0.3")
+    implementation("com.airbnb.android:showkase-annotation:1.0.3")
+    ksp(libs.showkase.processor)
+
+    implementation(libs.paparazzi)
+    testImplementation(libs.test.parameter.injector)
 }

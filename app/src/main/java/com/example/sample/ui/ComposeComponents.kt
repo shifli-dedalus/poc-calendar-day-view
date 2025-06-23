@@ -61,9 +61,14 @@ import java.time.ZonedDateTime
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TimePickerDialog(
-    modifier: Modifier = Modifier, onDismiss: () -> Unit = {}, onSet: () -> Unit,
-    dateSelectedText: String, textOnValueChange: (String) -> Unit, datePickerOnClick: () -> Unit,
-    timePickerState: TimePickerState, zonedDateTime: ZonedDateTime
+    modifier: Modifier = Modifier,
+    onDismiss: () -> Unit = {},
+    onSet: () -> Unit,
+    dateSelectedText: String,
+    textOnValueChange: (String) -> Unit,
+    datePickerOnClick: () -> Unit,
+    timePickerState: TimePickerState = rememberTimePickerState(),
+    zonedDateTime: ZonedDateTime = ZonedDateTime.now()
 ) {
 
     BasicAlertDialog(
@@ -151,7 +156,7 @@ fun DatePickerView(
     onDismissRequest: () -> Unit = {},
     onDismissButton: @Composable (() -> Unit)?,
     onConfirmButton: @Composable (() -> Unit),
-    datePickerState: DatePickerState
+    datePickerState: DatePickerState = rememberDatePickerState()
 ) {
     DatePickerDialog(
         dismissButton = onDismissButton,
@@ -333,51 +338,50 @@ fun CategoryColorItem(modifier: Modifier = Modifier, color: Color, text: String)
 }
 
 
-@Preview
-@Composable
-fun DateNavigator_Preview() = SampleAppThemePreview {
-    DateNavigator(
-        modifier = Modifier.fillMaxWidth(),
-        textTitle = "Tomorrow",
-        textOnClick = {},
-        forwardOnClick = {},
-        backOnClick = {}
-    )
-}
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview
-@Composable
-fun TimePickerDialog_Preview() = SampleAppThemePreview {
-    TimePickerDialog(
-        onSet = { },
-        dateSelectedText = "",
-        textOnValueChange = { },
-        datePickerOnClick = { },
-        timePickerState = rememberTimePickerState(),
-        zonedDateTime = ZonedDateTime.now()
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview
-@Composable
-fun DatePickerView_Preview() = SampleAppThemePreview {
-    DatePickerView(
-        onDismissButton = {}, onConfirmButton = {},
-        datePickerState = rememberDatePickerState()
-    )
-}
-
-
-@Preview
-@Composable
-fun CategoryDropMenu_Preview() = SampleAppThemePreview {
-    CategoryChooserDropMenu(expand = true, selectedColor = CategoryColor.purple_veronica)
-}
+//@Preview
+//@Composable
+//fun DateNavigator_Preview() = SampleAppThemePreview {
+//    DateNavigator(
+//        modifier = Modifier.fillMaxWidth(),
+//        textTitle = "Tomorrow",
+//        textOnClick = {},
+//        forwardOnClick = {},
+//        backOnClick = {}
+//    )
+//}
+//
+//
+//@OptIn(ExperimentalMaterial3Api::class)
+//@Preview
+//@Composable
+//fun TimePickerDialog_Preview() {
+//    TimePickerDialog(
+//        onSet = { },
+//        dateSelectedText = "",
+//        textOnValueChange = { },
+//        datePickerOnClick = { },
+//    )
+//}
+//
+//@OptIn(ExperimentalMaterial3Api::class)
+//@Preview
+//@Composable
+//fun DatePickerView_Preview() = SampleAppThemePreview {
+//    DatePickerView(
+//        onDismissButton = {},
+//        onConfirmButton = {},
+//    )
+//}
+//
+//
+//@Preview
+//@Composable
+//fun CategoryDropMenu_Preview() = SampleAppThemePreview {
+//    CategoryChooserDropMenu(expand = true, selectedColor = CategoryColor.purple_veronica)
+//}
 
 //@ShowkaseComposable
+@Preview
 @Composable
 fun MyButton() {
     Column(

@@ -532,9 +532,9 @@ fun addNewEvent(event: Event) {
 }
 
 
-@Preview
-@Composable
-fun CustomCreateEventScreen_Preview() =
-    SampleAppThemePreview {
-        CustomCreateEventScreen()
-    }
+//@Preview
+//@Composable
+//fun CustomCreateEventScreen_Preview() =
+//    SampleAppThemePreview {
+//        CustomCreateEventScreen()
+//    }

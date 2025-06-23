@@ -44,11 +44,10 @@ fun MainContentScreen(modifier: Modifier = Modifier) {
     }
 }
 
-
-@Preview
-@Composable
-@ShowkaseComposable
-fun MainContentScreenPreview() =
-    SampleAppThemePreview {
-        MainContentScreen()
-    }
+//
+//@Preview
+//@Composable
+//fun MainContentScreenPreview() =
+//    SampleAppThemePreview {
+//        MainContentScreen()
+//    }

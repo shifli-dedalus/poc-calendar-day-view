@@ -311,14 +311,6 @@ fun CategoryChooserDropMenu(
 }
 
 @Composable
-@ShowkaseComposable
-fun Test() {
-    Button({}) {
-        Text("Test")
-    }
-}
-
-@Composable
 fun CategoryColorItem(modifier: Modifier = Modifier, color: Color, text: String) {
     Row(
         modifier = modifier,
@@ -338,47 +330,47 @@ fun CategoryColorItem(modifier: Modifier = Modifier, color: Color, text: String)
 }
 
 
-//@Preview
-//@Composable
-//fun DateNavigator_Preview() = SampleAppThemePreview {
-//    DateNavigator(
-//        modifier = Modifier.fillMaxWidth(),
-//        textTitle = "Tomorrow",
-//        textOnClick = {},
-//        forwardOnClick = {},
-//        backOnClick = {}
-//    )
-//}
-//
-//
-//@OptIn(ExperimentalMaterial3Api::class)
-//@Preview
-//@Composable
-//fun TimePickerDialog_Preview() {
-//    TimePickerDialog(
-//        onSet = { },
-//        dateSelectedText = "",
-//        textOnValueChange = { },
-//        datePickerOnClick = { },
-//    )
-//}
-//
-//@OptIn(ExperimentalMaterial3Api::class)
-//@Preview
-//@Composable
-//fun DatePickerView_Preview() = SampleAppThemePreview {
-//    DatePickerView(
-//        onDismissButton = {},
-//        onConfirmButton = {},
-//    )
-//}
-//
-//
-//@Preview
-//@Composable
-//fun CategoryDropMenu_Preview() = SampleAppThemePreview {
-//    CategoryChooserDropMenu(expand = true, selectedColor = CategoryColor.purple_veronica)
-//}
+@Preview
+@Composable
+fun DateNavigator_Preview() = SampleAppThemePreview {
+    DateNavigator(
+        modifier = Modifier.fillMaxWidth(),
+        textTitle = "Tomljhjgfdfgcguhijlukjghorrow",
+        textOnClick = {},
+        forwardOnClick = {},
+        backOnClick = {}
+    )
+}
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview
+@Composable
+fun TimePickerDialog_Preview() {
+    TimePickerDialog(
+        onSet = { },
+        dateSelectedText = "",
+        textOnValueChange = { },
+        datePickerOnClick = { },
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview
+@Composable
+fun DatePickerView_Preview() = SampleAppThemePreview {
+    DatePickerView(
+        onDismissButton = {},
+        onConfirmButton = {},
+    )
+}
+
+
+@Preview
+@Composable
+fun CategoryDropMenu_Preview() = SampleAppThemePreview {
+    CategoryChooserDropMenu(expand = true, selectedColor = CategoryColor.purple_veronica)
+}
 
 //@ShowkaseComposable
 @Preview
@@ -387,6 +379,6 @@ fun MyButton() {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        Text("Click me", fontSize = 32.sp)
+        Text("__hgfhjbknClick me__", fontSize = 32.sp)
     }
 }

@@ -17,6 +17,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - name: Ensure gradlew is executable
+        run: chmod +x ./gradlew
       - name: Run screenshot tests
         id: run-screenshot-tests
         run: ./gradlew verifyPaparazziDebug

@@ -1,8 +1,6 @@
 package com.example.sample.ui
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,6 +22,7 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.BasicAlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DatePicker
@@ -44,41 +43,33 @@ import androidx.compose.material3.TimePickerState
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.drawscope.Fill
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.drawscope.rotate
-import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.toSize
+import androidx.compose.ui.unit.sp
+import com.airbnb.android.showkase.annotation.ShowkaseComposable
 import com.example.sample.ui.theme.CategoryColor
 import com.example.sample.ui.theme.SampleAppThemePreview
 import com.example.sample.ui.theme.Typography
 import java.time.ZonedDateTime
-import kotlin.math.atan2
-import kotlin.math.cos
-import kotlin.math.sin
-import kotlin.math.sqrt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TimePickerDialog(modifier: Modifier = Modifier, onDismiss: () -> Unit = {}, onSet: () -> Unit,
-                     dateSelectedText: String, textOnValueChange: (String) -> Unit, datePickerOnClick: () -> Unit,
-                     timePickerState: TimePickerState, zonedDateTime: ZonedDateTime) {
+fun TimePickerDialog(
+    modifier: Modifier = Modifier,
+    onDismiss: () -> Unit = {},
+    onSet: () -> Unit,
+    dateSelectedText: String,
+    textOnValueChange: (String) -> Unit,
+    datePickerOnClick: () -> Unit,
+    timePickerState: TimePickerState = rememberTimePickerState(),
+    zonedDateTime: ZonedDateTime = ZonedDateTime.now()
+) {
 
     BasicAlertDialog(
         modifier = modifier,
@@ -159,13 +150,14 @@ fun TimePickerDialog(modifier: Modifier = Modifier, onDismiss: () -> Unit = {}, 
 }
 
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DatePickerView(onDismissRequest: () -> Unit = {},
-                   onDismissButton: @Composable (() -> Unit)?,
-                   onConfirmButton: @Composable (() -> Unit),
-                   datePickerState: DatePickerState) {
+fun DatePickerView(
+    onDismissRequest: () -> Unit = {},
+    onDismissButton: @Composable (() -> Unit)?,
+    onConfirmButton: @Composable (() -> Unit),
+    datePickerState: DatePickerState = rememberDatePickerState()
+) {
     DatePickerDialog(
         dismissButton = onDismissButton,
         confirmButton = onConfirmButton,
@@ -179,9 +171,10 @@ fun DatePickerView(onDismissRequest: () -> Unit = {},
 
 
 @Composable
-fun ElevatedIconButton(modifier: Modifier = Modifier, onClick: () -> Unit,
-                       shape: Shape = RoundedCornerShape(10.dp), color: Color = MaterialTheme.colorScheme.surface,
-                       shadowElevation: Dp = 10.dp, iconContent: @Composable () -> Unit,
+fun ElevatedIconButton(
+    modifier: Modifier = Modifier, onClick: () -> Unit,
+    shape: Shape = RoundedCornerShape(10.dp), color: Color = MaterialTheme.colorScheme.surface,
+    shadowElevation: Dp = 10.dp, iconContent: @Composable () -> Unit,
 ) {
     Surface(
         modifier = modifier,
@@ -195,7 +188,6 @@ fun ElevatedIconButton(modifier: Modifier = Modifier, onClick: () -> Unit,
         )
     }
 }
-
 
 
 @Composable
@@ -243,8 +235,10 @@ fun DateNavigator(
 
 
 @Composable
-fun CategoryChooserDropMenu(modifier: Modifier = Modifier, expand: Boolean, selectedColor: Color,
-                            onSelected: (Color) -> Unit = {}, onDismiss: () -> Unit = {}) {
+fun CategoryChooserDropMenu(
+    modifier: Modifier = Modifier, expand: Boolean, selectedColor: Color,
+    onSelected: (Color) -> Unit = {}, onDismiss: () -> Unit = {}
+) {
 
     Box {
         DropdownMenu(
@@ -336,13 +330,12 @@ fun CategoryColorItem(modifier: Modifier = Modifier, color: Color, text: String)
 }
 
 
-
 @Preview
 @Composable
-private fun DateNavigator_Preview() = SampleAppThemePreview {
+fun DateNavigator_Preview() = SampleAppThemePreview {
     DateNavigator(
         modifier = Modifier.fillMaxWidth(),
-        textTitle = "Tomorrow",
+        textTitle = "Tomljhjgfdfgcguhijlukjghorrow",
         textOnClick = {},
         forwardOnClick = {},
         backOnClick = {}
@@ -353,30 +346,39 @@ private fun DateNavigator_Preview() = SampleAppThemePreview {
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-private fun TimePickerDialog_Preview() = SampleAppThemePreview {
+fun TimePickerDialog_Preview() {
     TimePickerDialog(
         onSet = { },
         dateSelectedText = "",
         textOnValueChange = { },
         datePickerOnClick = { },
-        timePickerState = rememberTimePickerState(),
-        zonedDateTime = ZonedDateTime.now()
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-private fun DatePickerView_Preview() = SampleAppThemePreview {
+fun DatePickerView_Preview() = SampleAppThemePreview {
     DatePickerView(
-        onDismissButton = {}, onConfirmButton = {},
-        datePickerState = rememberDatePickerState()
+        onDismissButton = {},
+        onConfirmButton = {},
     )
 }
 
 
 @Preview
 @Composable
-private fun CategoryDropMenu_Preview() = SampleAppThemePreview {
+fun CategoryDropMenu_Preview() = SampleAppThemePreview {
     CategoryChooserDropMenu(expand = true, selectedColor = CategoryColor.purple_veronica)
+}
+
+//@ShowkaseComposable
+@Preview
+@Composable
+fun MyButton() {
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Text("__hgfhjbknClick me__", fontSize = 32.sp)
+    }
 }

@@ -347,9 +347,9 @@ fun getYOffestFromStartHr(startTimePair: Pair<Int, Int>): Float {
     return (hour.toFloat() + (mins.toFloat() / 60f))
 }
 
-@Preview()
+@Preview
 @Composable
-private fun DayTimeSlot_Preview() = SampleAppThemePreview {
+fun DayTimeSlot_Preview() = SampleAppThemePreview {
     DayTimeSlotScreen()
 }
 

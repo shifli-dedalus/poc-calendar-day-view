@@ -335,7 +335,7 @@ fun CategoryColorItem(modifier: Modifier = Modifier, color: Color, text: String)
 fun DateNavigator_Preview() = SampleAppThemePreview {
     DateNavigator(
         modifier = Modifier.fillMaxWidth(),
-        textTitle = "Yesterday                  Today                    Tomorrow",
+        textTitle = "Yesterday       -           Today                    Tomorrow",
         textOnClick = {},
         forwardOnClick = {},
         backOnClick = {}

@@ -3,29 +3,19 @@ package com.example.sample
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.airbnb.android.showkase.models.Showkase
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.CompositionLocalProvider
+import com.example.sample.ui.LocalNavController
+import com.example.sample.ui.SampleAppNavHost
+import com.example.sample.ui.appNavGraphBuilder
+import com.example.sample.ui.getNavHostController
+import com.example.sample.ui.theme.SampleAppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContent {
-            startActivity(Showkase.getBrowserIntent(this))
-            finish()
-        }
-
-
-//        startActivity(ShowkaseBrowserActivity.getIntent(this, "app"))
-//        finish()
-
-
-//        setContent {
-//            SampleAppTheme {
-//                ShowkaseComposable()
-//            }
-//        }
-
-        /*enableEdgeToEdge()
+        enableEdgeToEdge()
         setContent {
             SampleAppTheme {
                 val navHostController = getNavHostController()
@@ -39,6 +29,6 @@ class MainActivity : ComponentActivity() {
                 }
 
             }
-        }*/
+        }
     }
 }

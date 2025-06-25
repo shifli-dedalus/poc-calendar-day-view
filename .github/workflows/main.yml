@@ -21,7 +21,7 @@ jobs:
         run: chmod +x ./gradlew
       - name: Run screenshot tests
         id: run-screenshot-tests
-        run: ./gradlew verifyPaparazziDebug
+        run: ./gradlew verifyPaparazziDebug --info
       # - name: Process failed screenshot tests
       #   if: failure()
       #   id: failed-screenshots

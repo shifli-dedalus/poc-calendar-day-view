@@ -22,14 +22,14 @@ jobs:
       - name: Run screenshot tests
         id: run-screenshot-tests
         run: ./gradlew verifyPaparazziDebug --info
-      # - name: Process failed screenshot tests
-      #   if: failure()
-      #   id: failed-screenshots
-      #   run: "./.github/workflows/scripts/process_failed_screenshots.sh"
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
-      #     PR_BRANCH: ${{ github.head_ref }}
+      - name: Process failed screenshot tests
+        if: failure()
+        id: failed-screenshots
+        run: "./.github/workflows/scripts/process_failed_screenshots.sh"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
+          PR_BRANCH: ${{ github.head_ref }}
       - name: Comment PR if screenshot tests failed
         uses: octokit/request-action@v2.0.0
         if: always() && steps.failed-screenshots.outputs.PR_COMMENT

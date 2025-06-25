@@ -23,7 +23,7 @@ jobs:
         id: run-screenshot-tests
         run: ./gradlew verifyPaparazziDebug --info
       - name: Make script executable
-        run: chmod +x .github/scripts/process_failed_screenshots.sh
+        run: chmod +x ./.github/scripts/process_failed_screenshots.sh
       - name: Process failed screenshot tests
         if: failure()
         id: failed-screenshots

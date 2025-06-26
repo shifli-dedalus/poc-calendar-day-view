@@ -27,6 +27,15 @@ jobs:
 
       - name: Make script executable
         run: chmod +x .github/scripts/process_failed_screenshots.sh
+      # DEBUGGING STEPS ---
+      - name: "Debug: Check file permissions"
+        run: ls -la .github/scripts/
+
+      - name: "Debug: Check file type and shebang"
+        run: |
+          file .github/scripts/process_failed_screenshots.sh
+          echo "---"
+          head -n 1 .github/scripts/process_failed_screenshots.sh | cat -A
 
       - name: Process failed screenshot tests
         if: failure()

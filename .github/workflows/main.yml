@@ -41,7 +41,7 @@ jobs:
         if: failure()
         id: failed-screenshots
         # Use ./ to directly execute the script in the runner's shell
-        run: ./.github/scripts/process_failed_screenshots.sh
+        run: bash .github/scripts/process_failed_screenshots.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_BRANCH: ${{ github.head_ref }}

@@ -15,7 +15,7 @@ if [[ -z ${PR_BRANCH} ]]; then
   exit 1
 fi
 
-./gradlew recordPaparazziDebug
+./gradlew verifyPaparazziDebug
 
 PR_NUMBER=${GITHUB_REF#refs/pull/}
 PR_NUMBER=${PR_NUMBER/\/merge/}

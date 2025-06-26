@@ -31,7 +31,7 @@ fun MainContentScreen(modifier: Modifier = Modifier) {
                     navHostController.navigate(route = CustomCreateEventRoute)
                 },
                 shape = RectangleShape,
-                containerColor = Color(0xFFFFAA00),
+                containerColor = Color(0xFFFF0000),
                 contentColor = Color.White
             ) {
                 Icon(

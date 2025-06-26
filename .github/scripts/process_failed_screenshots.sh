@@ -28,9 +28,9 @@ git fetch --all
 git checkout --track "origin/$PR_BRANCH"
 git checkout -b "$NEW_BRANCH_NAME"
 # Add the Paparazzi HTML report
-git add -f app/build/reports/tests/testDebugUnitTest
+git add -f app/build/reports/tests/testDebugUnitTest/index.html
 # Add the Paparazzi failure images (including delta-*.png)
-git add -f app/build/paparazzi/failures/
+git add -f app/build/paparazzi/failures/delta-*.png
 git add -A
 git commit -m "Update screenshots"
 git push --force "https://$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"

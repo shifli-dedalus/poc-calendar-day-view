@@ -11,6 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import com.airbnb.android.showkase.annotation.ShowkaseComposable
 import com.example.sample.ui.CustomCreateEventRoute
@@ -29,8 +30,8 @@ fun MainContentScreen(modifier: Modifier = Modifier) {
                 onClick = {
                     navHostController.navigate(route = CustomCreateEventRoute)
                 },
-                shape = CircleShape,
-                containerColor = Color(0xFFFFAA00),
+                shape = RectangleShape,
+                containerColor = Color(0xFFFF0000),
                 contentColor = Color.White
             ) {
                 Icon(

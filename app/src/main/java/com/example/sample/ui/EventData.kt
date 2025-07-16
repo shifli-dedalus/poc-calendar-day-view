@@ -1,8 +1,6 @@
 package com.example.sample.ui
 
 import androidx.compose.ui.graphics.Color
-import com.example.sample.ui.screens.getHrAndMinPair
-import com.example.sample.ui.screens.getTimeAsFloat
 import com.example.sample.ui.theme.CategoryColor
 import java.time.ZonedDateTime
 import kotlin.time.Duration.Companion.minutes

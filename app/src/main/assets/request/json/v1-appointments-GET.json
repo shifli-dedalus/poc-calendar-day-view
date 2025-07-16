@@ -1,0 +1,211 @@
+[
+  {
+    "actions": {
+      "reqAgain": false,
+      "retryBook": false,
+      "cancel": true,
+      "move": true
+    },
+    "attributes": {},
+    "created": "2025-07-14T23:30:00Z",
+    "description": "Sprechstunde für Adipositas, QODE4424 Kontrollen Adipositas",
+    "displayName": "0. ICAS-Adipositas Sprechstunde 1, Sprechstunde Adipositas",
+    "endDate": "%ISO_DATE%T01:30:00Z",
+    "id": "d8790855-265f-470d-a432-8883ae13512a",
+    "lastUpdate": "%ISO_DATE-1%T23:30:00Z",
+    "personId": "a8984a01-9e00-4f45-af61-18a9ead2db2a",
+    "startDate": "%ISO_DATE-1%T23:30:00Z",
+    "status": "APPROVE_WAITING",
+    "type": "APPOINTMENT"
+  },
+  {
+    "actions": {
+      "reqAgain": false,
+      "retryBook": false,
+      "cancel": true,
+      "move": true
+    },
+    "attributes": {},
+    "created": "%ISO_DATE-1%T12:06:09.605648Z",
+    "description": "Sprechstunde für Adipositas, QODE4424 Kontrollen Adipositas",
+    "displayName": "1. ICAS-Adipositas Sprechstunde 1, Sprechstunde Adipositas",
+    "endDate": "%ISO_DATE%T04:30:00Z",
+    "id": "d8790855-265f-470d-a432-8883ae13512a",
+    "lastUpdate": "%ISO_DATE%T12:06:14.276290Z",
+    "personId": "a8984a01-9e00-4f45-af61-18a9ead2db2a",
+    "startDate": "%ISO_DATE%T01:00:00Z",
+    "status": "APPROVE_WAITING",
+    "type": "APPOINTMENT"
+  },
+  {
+    "actions": {
+      "reqAgain": false,
+      "retryBook": false,
+      "cancel": true,
+      "move": true
+    },
+    "attributes": {},
+    "created": "%ISO_DATE-1%T12:06:09.605648Z",
+    "description": "Sprechstunde für Adipositas, QODE4424 Kontrollen Adipositas",
+    "displayName": "2. ICAS-Adipositas Sprechstunde 1, Sprechstunde Adipositas",
+    "endDate": "%ISO_DATE%T07:00:00Z",
+    "id": "d8790855-265f-470d-a432-8883ae13512a",
+    "lastUpdate": "%ISO_DATE%T12:06:14.276290Z",
+    "personId": "a8984a01-9e00-4f45-af61-18a9ead2db2a",
+    "startDate": "%ISO_DATE%T05:00:00Z",
+    "status": "APPROVE_WAITING",
+    "type": "APPOINTMENT"
+  },
+  {
+    "actions": {
+      "reqAgain": false,
+      "retryBook": false,
+      "cancel": true,
+      "move": true
+    },
+    "attributes": {},
+    "created": "%ISO_DATE-1%T12:06:09.605648Z",
+    "description": "Sprechstunde für Adipositas, QODE4424 Kontrollen Adipositas",
+    "displayName": "3. ICAS-Adipositas Sprechstunde 1, Sprechstunde Adipositas",
+    "endDate": "%ISO_DATE%T01:30:00Z",
+    "id": "d8790855-265f-470d-a432-8883ae13512a",
+    "lastUpdate": "%ISO_DATE%T12:06:14.276290Z",
+    "personId": "a8984a01-9e00-4f45-af61-18a9ead2db2a",
+    "startDate": "%ISO_DATE%T23:30:00Z",
+    "status": "APPROVE_WAITING",
+    "type": "APPOINTMENT"
+  },
+  {
+    "actions": {
+      "reqAgain": false,
+      "retryBook": false,
+      "cancel": true,
+      "move": false
+    },
+    "attributes": {
+      "BOOK_AGAIN_ENABLED": false
+    },
+    "created": "2024-11-06T12:32:19.233957Z",
+    "createdBy": {
+      "name": "QODE0804",
+      "type": "extSys"
+    },
+    "description": "Schlank in die Zukunft",
+    "displayName": "Adipositas Sprechstunde",
+    "endDate": "%ISO_DATE+1%T13:20:00Z",
+    "id": "16a9d954-0873-4692-80c7-0c273a8df1e4",
+    "personId": "a8984a01-9e00-4f45-af61-18a9ead2db2a",
+    "startDate": "%ISO_DATE+1%T21:30:00Z",
+    "status": "APPROVED",
+    "type": "APPOINTMENT"
+  },
+  {
+    "actions": {
+      "reqAgain": true,
+      "retryBook": false,
+      "cancel": true,
+      "move": true
+    },
+    "attributes": {},
+    "created": "%ISO_DATE-1%T14:45:49.186758Z",
+    "description": "XODDE0804 Erstgespräch-Augenarzt",
+    "displayName": "Klinikum Bonn, XODE0804-Augenarzt Sprechstunde",
+    "endDate": "%ISO_DATE+1%T01:40:00Z",
+    "id": "2e11e500-3cd7-4c63-90f0-7a16a5953513",
+    "lastUpdate": "%ISO_DATE-1%T14:45:49.535295Z",
+    "personId": "a8984a01-9e00-4f45-af61-18a9ead2db2a",
+    "startDate": "%ISO_DATE%T22:00:00Z",
+    "status": "APPROVED",
+    "type": "APPOINTMENT"
+  },
+  {
+    "actions": {
+      "reqAgain": true,
+      "retryBook": false,
+      "cancel": true,
+      "move": true
+    },
+    "attributes": {},
+    "created": "%ISO_DATE-1%T14:38:16.788089Z",
+    "description": "QODE 4425 ICAS-Augenarzt Sprechstunde (Feiertage Test), QODE 4425 Erstgespräch Augenarzt (Feiertag Test)",
+    "displayName": "PXCS_test facility, Service Tests",
+    "endDate": "%ISO_DATE+1%T11:00:00Z",
+    "id": "5a5b6cd7-7f70-4e47-8e68-5ec36789c343",
+    "lastUpdate": "%ISO_DATE-1%T14:38:22.071116Z",
+    "personId": "a8984a01-9e00-4f45-af61-18a9ead2db2a",
+    "startDate": "%ISO_DATE+1%T06:00:00Z",
+    "status": "APPROVED",
+    "type": "APPOINTMENT"
+  },
+  {
+    "actions": {
+      "reqAgain": false,
+      "retryBook": false,
+      "cancel": true,
+      "move": false
+    },
+    "attributes": {},
+    "created": "2024-11-06T13:05:01.213818Z",
+    "createdBy": {
+      "id": "91a1315d-0a29-e88a-4e8a-726b2773b757",
+      "name": "Hausarzt Onzima",
+      "type": "tenant"
+    },
+    "description": "Erstgespräch",
+    "displayName": "Klinikum Bonn, Augenarzt Sprechstunde (Termanfrage + Online Termin)",
+    "endDate": "%ISO_DATE-1%T07:30:00Z",
+    "id": "33583d69-2dc9-47ed-816c-9e2ad52df492",
+    "lastUpdate": "2024-11-06T13:05:01.979907Z",
+    "personId": "a8984a01-9e00-4f45-af61-18a9ead2db2a",
+    "startDate": "%ISO_DATE-1%T07:00:00Z",
+    "status": "APPROVE_WAITING",
+    "type": "APPOINTMENT"
+  },
+  {
+    "actions": {
+      "reqAgain": true,
+      "retryBook": false,
+      "cancel": false,
+      "move": false
+    },
+    "attributes": {},
+    "created": "2024-10-15T11:30:00.429586Z",
+    "description": "QODE4424 Spezialuntersuchung-Kontigent",
+    "displayName": "Klinikum Bonn, TEstVP",
+    "endDate": "2024-10-17T10:00:00Z",
+    "id": "2f387183-e116-4304-a06a-8aa83a85b470",
+    "lastUpdate": "2024-10-16T10:04:08.656047Z",
+    "personId": "a8984a01-9e00-4f45-af61-18a9ead2db2a",
+    "startDate": "2024-10-16T06:00:00Z",
+    "status": "ARCHIVED",
+    "type": "APPOINTMENT"
+  },
+  {
+    "actions": {
+      "reqAgain": false,
+      "retryBook": false,
+      "cancel": false,
+      "move": false
+    },
+    "approvalLastDate": "2024-09-24T11:35:31.343681Z",
+    "attributes": {},
+    "canceledBy": {
+      "name": "QODE4425",
+      "type": "extSys"
+    },
+    "created": "2024-09-24T11:30:20.790488Z",
+    "createdBy": {
+      "name": "QODE4425",
+      "type": "extSys"
+    },
+    "description": "Vor-/Stationäre Behandlung",
+    "displayName": "Aufenthalte Innere Medizin [QODE4425]",
+    "endDate": "2024-09-29T13:00:00Z",
+    "id": "a058f1b7-a9a2-4072-ad49-25618c161bd6",
+    "lastUpdate": "2024-09-24T11:36:21.532655Z",
+    "personId": "a8984a01-9e00-4f45-af61-18a9ead2db2a",
+    "startDate": "2024-09-24T11:34:00Z",
+    "status": "CANCELED",
+    "type": "STAY"
+  }
+]

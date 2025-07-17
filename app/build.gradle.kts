@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.paparazzi)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -39,6 +40,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -70,4 +72,16 @@ dependencies {
 
     testImplementation(libs.paparazzi)
     testImplementation(libs.test.parameter.injector)
+
+    
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.okhttp)
+    implementation(libs.ktor.client.android)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.ktor.client.logging)
+    implementation(libs.ktor.client.mock)
+
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
 }

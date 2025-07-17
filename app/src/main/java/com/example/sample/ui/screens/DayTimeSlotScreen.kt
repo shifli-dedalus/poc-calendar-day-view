@@ -38,31 +38,78 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.sample.common.model.IcasAppointment
 import com.example.sample.ui.DateNavigator
 import com.example.sample.ui.DatePickerView
+import com.example.sample.ui.categoryColor
 import com.example.sample.ui.convertMilliToLocalDate
 import com.example.sample.ui.convertToStringPattern
 import com.example.sample.ui.eventListData
+import com.example.sample.ui.getEndTimeFloat
+import com.example.sample.ui.getHrAndMinPair
+import com.example.sample.ui.getMostRecentUpcomingDate
+import com.example.sample.ui.getStartTimeFloat
+import com.example.sample.ui.getTimeMinutesBlockHeight
+import com.example.sample.ui.getYOffestFromStartHr
+import com.example.sample.ui.groupOverlappingAppointments
+import com.example.sample.ui.groupOverlappingEvents2
 import com.example.sample.ui.setUpdatedDateInZonedDateTime
+import com.example.sample.ui.startTimeTxt
 import com.example.sample.ui.theme.SampleAppThemePreview
+import com.example.sample.ui.toZonedLocalDate
+import com.example.sample.ui.viewmodel.DayTimeSlotViewModel
+import kotlinx.coroutines.flow.collectLatest
+import org.koin.androidx.compose.koinViewModel
 import java.time.ZonedDateTime
 
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DayTimeSlotScreen(modifier: Modifier = Modifier) {
-    
+fun DayTimeSlotScreen(
+    modifier: Modifier = Modifier,
+    viewModel: DayTimeSlotViewModel = koinViewModel()
+) {
+
+    // TODO: test mock http service
+    LaunchedEffect(Unit) {
+        viewModel.getAppointments()
+
+
+        viewModel.appointmentData.collectLatest {
+            println("collectLatest data = $it")
+        }
+    }
+    val appointmentsList by viewModel.appointmentData.collectAsStateWithLifecycle()
+
+
     var showDatePicker by remember { mutableStateOf(false) }
     var dayTitleTxt by remember { mutableStateOf("Today") }
-    
     var currentZonedDateTime by remember { mutableStateOf(ZonedDateTime.now()) }
+
+
+    // todo: get most recent upcoming date in list
+    if (appointmentsList.isNotEmpty()) {
+        val mostRecentUpcomingZonedDateTime = getMostRecentUpcomingDate(
+            appointmentsList.map { it.startDate },
+            currentZonedDateTime
+        )
+
+        println("mostRecentUpcomingZonedDateTime = $mostRecentUpcomingZonedDateTime")
+
+        currentZonedDateTime = mostRecentUpcomingZonedDateTime.takeIf {
+            mostRecentUpcomingZonedDateTime != null
+        }
+    }
+
+    println("currentZonedDateTime = $currentZonedDateTime")
 
     val datePickerState = rememberDatePickerState(
         initialSelectedDateMillis = currentZonedDateTime.toLocalDateTime()
             .toInstant(currentZonedDateTime.offset)
             .toEpochMilli()
     )
-
 
     Scaffold { innerPadding ->
         Column(modifier.padding(innerPadding)) {
@@ -71,24 +118,29 @@ fun DayTimeSlotScreen(modifier: Modifier = Modifier) {
                     .fillMaxWidth()
                     .padding(horizontal = 10.dp)
                     .padding(top = 10.dp),
-                textTitle = dayTitleTxt,
+                textTitle = updateDayTitleText(
+                    currentZonedDateTime
+                ),
                 textOnClick = { showDatePicker = true },
                 forwardOnClick = {
                     currentZonedDateTime = currentZonedDateTime.plusDays(1)
-                    dayTitleTxt = updateDayTitleText(currentZonedDateTime)
                 },
                 backOnClick = {
                     currentZonedDateTime = currentZonedDateTime.minusDays(1)
-                    dayTitleTxt = updateDayTitleText(currentZonedDateTime)
                 }
             )
 
+            println("value appointmentsList = $appointmentsList")
 
-            val filteredEventList = eventListData.filter {
-                it.startZonedDateTime.toLocalDate() == currentZonedDateTime.toLocalDate()
+            val filteredAppointmentList = appointmentsList.filter {
+                it.startDate.toZonedLocalDate() == currentZonedDateTime.toLocalDate()
             }
 
-            EventTimeLineView(eventList = filteredEventList)
+            println("value filteredAppointmentList = $filteredAppointmentList")
+
+            //EventTimeLineView(eventList = filteredEventList)
+
+            EventTimeLineViewForAppointment(appointmentList = filteredAppointmentList)
         }
     }
 
@@ -139,6 +191,116 @@ private fun updateDayTitleText(currentZonedDateTime: ZonedDateTime): String {
 }
 
 
+// todo: working for IcasAppoints
+// todo: working good as expected with overlap & good spacing
+
+@SuppressLint("UnusedBoxWithConstraintsScope")
+@Composable
+fun EventTimeLineViewForAppointment(
+    modifier: Modifier = Modifier,
+    hrHeight: Dp = 80.dp,
+    yOffsetCoEff: Float = 0.50f,
+    appointmentList: List<IcasAppointment> = emptyList()
+) {
+
+    val vScrollState = rememberScrollState()
+    val density = LocalDensity.current
+
+    println("DayTimeSlotScreen appointmentList = $appointmentList, size = ${appointmentList.size}")
+
+    Box(
+        modifier = modifier
+            .padding(start = 10.dp, end = 10.dp)
+            .fillMaxSize()
+            .verticalScroll(vScrollState)
+            .fillMaxHeight()
+            .fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+        ) {
+            // hour timeline view
+            for (hour in 0 until 25) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(hrHeight),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    val hourText = if (hour == 24) {
+                        "00:00"
+                    } else {
+                        "%02d:00".format(hour)
+                    }
+                    Text(
+                        text = hourText,
+                        modifier = Modifier
+                            .width(56.dp)
+                            .padding(end = 10.dp)
+                    )
+                    HorizontalDivider(
+                        modifier = Modifier
+                            .weight(1f)
+                    )
+                }
+            }
+        }
+
+        // TODO: For Appointments
+        val groupOverlapAppointment = groupOverlappingAppointments(appointmentList)
+
+        Box(
+            modifier = Modifier
+                .padding(start = 65.dp)
+                .fillMaxWidth()
+        ) {
+            groupOverlapAppointment.forEach {
+
+                Row {
+
+                    it.forEachIndexed { index, appointment ->
+
+                        val startTimePair = getHrAndMinPair(appointment.startTimeTxt)
+
+                        val startTimeFloat = appointment.getStartTimeFloat()
+                        val endTimeFloat = appointment.getEndTimeFloat()
+
+                        val yOffsetValue = getYOffestFromStartHr(startTimePair) + yOffsetCoEff
+                        val yToPx = with(density) { (yOffsetValue) * hrHeight.toPx() }
+
+                        val heightToPx =
+                            getTimeMinutesBlockHeight(startTimeFloat, endTimeFloat, hrHeight)
+
+                        Card (
+                            modifier = Modifier
+                                .weight(1f)
+                                .absoluteOffset {
+                                    IntOffset(x = 0, y = yToPx.toInt())
+                                }
+                                .padding(end = 5.dp)
+                                .height(heightToPx),
+                            colors = CardDefaults.cardColors(
+                                appointment.categoryColor.copy(alpha = 0.65f)
+                            ),
+                            shape = RoundedCornerShape(10.dp)
+                        ) {
+                            Text(
+                                modifier = Modifier
+                                    .padding(vertical = 1.dp, horizontal = 10.dp)
+                                    .padding(bottom = 2.dp),
+                                text =  appointment.displayName, color = Color.White,
+                                fontWeight = FontWeight.Bold,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
+
 // todo: try 4 final
 // todo: working good as expected with overlap & good spacing
 
@@ -148,15 +310,12 @@ fun EventTimeLineView(
     modifier: Modifier = Modifier,
     eventList: List<com.example.sample.ui.Event> = emptyList(),
     hrHeight: Dp = 80.dp,
-    yOffsetCoEff: Float = 0.50f
+    yOffsetCoEff: Float = 0.50f,
 ) {
 
     val vScrollState = rememberScrollState()
     val density = LocalDensity.current
 
-    LaunchedEffect(Unit) {
-        println("DayTimeSlotScreen eventList = $eventList, size = ${eventList.size}")
-    }
 
     Box(
         modifier = modifier
@@ -198,7 +357,7 @@ fun EventTimeLineView(
 
         // for overlap
         val groupOverlapEvents = groupOverlappingEvents2(eventList)
-//        println("WeekView_Overlap_2 = ${groupOverlappingEvents2(eventList)}")
+        //println("WeekView_Overlap_2 = ${groupOverlappingEvents2(eventList)}")
 
 
         Box(
@@ -207,7 +366,6 @@ fun EventTimeLineView(
                 .fillMaxWidth()
         ) {
             groupOverlapEvents.forEach {
-
                 Row {
 
                     it.forEachIndexed { index, event ->
@@ -251,100 +409,6 @@ fun EventTimeLineView(
         }
 
     }
-}
-
-
-
-private fun groupOverlappingEvents(events: List<com.example.sample.ui.Event>): List<List<com.example.sample.ui.Event>> {
-    val sortedEvents = events.sortedBy { it.getStartTimeFloat() }
-    val groupEvents = mutableListOf<MutableList<com.example.sample.ui.Event>>()
-
-    for (sortedEvent in sortedEvents) {
-        var addToExistingGroup = false
-
-        for (groupEvent in groupEvents) {
-            val isOverlappingEvent = groupEvent.any { it.getStartTimeFloat() < sortedEvent.getEndTimeFloat()
-                    && it.getEndTimeFloat() > sortedEvent.getStartTimeFloat() }
-
-            if (isOverlappingEvent) {
-                groupEvent.add(sortedEvent)
-                addToExistingGroup = true
-                break
-            }
-
-        }
-
-        if(!addToExistingGroup){
-            groupEvents.add(mutableListOf(sortedEvent))
-        }
-    }
-
-    return groupEvents
-}
-
-private fun groupOverlappingEvents2(events: List<com.example.sample.ui.Event>): List<List<com.example.sample.ui.Event>> {
-    if (events.isEmpty()) return emptyList()
-
-    val sortedEvents = events.sortedBy { it.getStartTimeFloat() }
-    val resultGroupEvents = mutableListOf<MutableList<com.example.sample.ui.Event>>()
-
-    var currentGroup = mutableListOf<com.example.sample.ui.Event>()
-    currentGroup.add(sortedEvents.first())
-
-    for (index in 1 until sortedEvents.size) {
-        val currentEvent = sortedEvents[index]
-        val lastEventInGroup = currentGroup.last()
-
-        val isOverlapping = currentEvent.getStartTimeFloat() < lastEventInGroup.getEndTimeFloat()
-
-        if(isOverlapping) {
-            currentGroup.add(currentEvent)
-        } else {
-            if (currentGroup.isNotEmpty())
-                resultGroupEvents.add(currentGroup)
-
-            currentGroup = mutableListOf(currentEvent)
-        }
-    }
-
-    if (currentGroup.isNotEmpty())
-        resultGroupEvents.add(currentGroup)
-
-    return resultGroupEvents
-}
-
-
-
-fun getHrAndMinPair(time: String): Pair<Int, Int> {
-    check(time.contains(":") && time.split(":").count() == 2) {
-        "Invalid TimeFormat. Required HH:mm in 24hr format"
-    }
-
-    val hour = time.split(":")[0].toIntOrNull()
-    val mins = time.split(":")[1].toIntOrNull()
-
-    checkNotNull(hour)
-    checkNotNull(mins)
-
-    return Pair(hour, mins)
-}
-
-fun getTimeAsFloat(hourMinsPair: Pair<Int, Int>): Float {
-    val hour = hourMinsPair.first
-    val mins = hourMinsPair.second
-    return (hour * 60 + mins).toFloat()
-}
-
-fun getTimeMinutesBlockHeight(startTime: Float, endTime: Float, hrHeight: Dp): Dp {
-    val diffMin = (endTime - startTime)
-    val minsHeightDp = (hrHeight / 60f)
-    return (diffMin * minsHeightDp.value).dp
-}
-
-fun getYOffestFromStartHr(startTimePair: Pair<Int, Int>): Float {
-    val hour = startTimePair.first
-    val mins = startTimePair.second
-    return (hour.toFloat() + (mins.toFloat() / 60f))
 }
 
 @Preview

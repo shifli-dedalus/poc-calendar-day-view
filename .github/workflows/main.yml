@@ -12,22 +12,34 @@ concurrency:
 jobs:
   screenshot-tests:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
+      - name: Ensure gradlew is executable
+        run: chmod +x ./gradlew
+
       - name: Run screenshot tests
         id: run-screenshot-tests
-        run: ./gradlew verifyPaparazziDebug
+        run: ./gradlew verifyPaparazziDebug --info
+
+      - name: Make script executable
+        run: chmod +x .github/scripts/process_failed_screenshots.sh
+
       - name: Process failed screenshot tests
         if: failure()
         id: failed-screenshots
-        run: "./.github/workflows/scripts/process_failed_screenshots.sh"
+        # Use ./ to directly execute the script in the runner's shell
+        run: bash .github/scripts/process_failed_screenshots.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
           PR_BRANCH: ${{ github.head_ref }}
+
       - name: Comment PR if screenshot tests failed
         uses: octokit/request-action@v2.0.0
         if: always() && steps.failed-screenshots.outputs.PR_COMMENT

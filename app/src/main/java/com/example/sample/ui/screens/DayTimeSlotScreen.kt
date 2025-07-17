@@ -411,9 +411,9 @@ fun EventTimeLineView(
     }
 }
 
-@Preview()
+@Preview
 @Composable
-private fun DayTimeSlot_Preview() = SampleAppThemePreview {
+fun DayTimeSlot_Preview() = SampleAppThemePreview {
     DayTimeSlotScreen()
 }
 
